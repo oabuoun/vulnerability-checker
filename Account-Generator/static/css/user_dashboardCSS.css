@@ -1,0 +1,13 @@
+@import url("overview.css");
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.user_container {
+	width: 100%;
+}

@@ -1,0 +1,34 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manager Options</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'css/manager_dashboardCSS.css') }}" title = "home page CSS"/>
+	<script  src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+</head>
+<body>
+  <script type="text/javascript">
+	  var myToken = localStorage.getItem("myToken")
+	  var myUsername = localStorage.getItem("myUsername")
+
+	  if ((myToken == null) || (myToken == "")) {
+	    document.location.href = "/"
+	  }
+
+
+	  function logout(){
+	     localStorage.removeItem("myToken")
+	     localStorage.removeItem("myUsername")
+	     document.location.href = "/"
+	  }
+
+	</script>
+  <div class="manager_container">
+    <div class="form-group">
+      <button id= "btnLogout" type="button" value="Log out" onclick="logout()">Token Invalid. Click here to return to Homepage</button>
+    </div>
+  </div>
+</body>
+
+</html>

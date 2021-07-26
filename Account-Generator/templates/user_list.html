@@ -1,0 +1,170 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>List of Users</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type = "text/css" href= "{{ url_for('static', filename = 'css/user_listCSS.css') }}" title = "home page CSS"/>
+  <script  src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var myToken = localStorage.getItem("myToken")
+    var myUsername = localStorage.getItem("myUsername")
+
+    if ((myToken == null) || (myToken == "")) {
+      document.location.href = "/"
+    }
+    var page = 1
+  </script>
+  <script>
+  function navShrink() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+
+  function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  </script>
+
+</head>
+<body>
+
+<div class="header">
+	<div class = "topheader">
+	</div>
+	<div class="topnav" id="myTopnav">
+		<div class="topnav-right">
+			<a href="javascript:void(0);" class="icon" onclick="navShrink()">
+			<i class="menu-bars"></i>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="rowShape">
+	<div class="col-d-2 col-t-12">
+	left
+	</div>
+
+  <div class="col-d-8 col-t-12">
+    <form id="opForm">
+  		<input id = "button_submit" type="submit" value="Generate Table of Users"/>
+  		<div id="showData"></div>
+    </form>
+    <script type="application/javascript">
+
+      $("#opForm").submit(function (e){
+
+        var action = "/user_list/show?page=" + page
+        $.ajax({
+          type: "GET",
+          url: action,
+          processData: false,
+          dataType: 'json',
+          async: false,
+          headers: {
+            "Authorization": "Bearer " + myToken
+          },
+          data: $("#opForm").serialize(),
+
+          success: function (response) {
+
+            // EXTRACT VALUE FOR HTML HEADER.
+            // ('Book ID', 'Book Name', 'Category' and 'Price')
+            var col = [];
+            for (var i = 0; i < response.length; i++) {
+                for (var key in response[i]) {
+
+                    if (col.indexOf(key) === -1) {
+                        col.push(key);
+                    }
+                }
+            }
+
+            // CREATE DYNAMIC TABLE.
+            var table = document.createElement("table");
+
+            // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+            var tr = table.insertRow(-1);                   // TABLE ROW.
+
+            for (var i = 0; i < col.length; i++) {
+                var th = document.createElement("th");      // TABLE HEADER.
+                th.innerHTML = col[i];
+                tr.appendChild(th);
+            }
+
+						for (var i = 0; i < response.length; i++) {
+            	tr = table.insertRow(-1);
+
+							for (var j = 0; j < col.length; j++) {
+				      	var tabCell = tr.insertCell(-1);
+				        tabCell.innerHTML = response[i][col[j]];
+				      }
+				    }
+
+						//alert(table)
+            var divContainer = document.getElementById("showData");
+						//alert(divContainer)
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table);
+            //$("#showData").html("")
+						//$("#showData").append(table)
+        },
+          error: function (error) {
+            alert(JSON.stringify(error))
+          },
+          complete: function () {
+            // Handle the complete event
+          }
+        });
+        e.preventDefault() ;
+      }) ;
+    </script>
+
+  </div>
+
+	<div class="col-d-2 col-t-12">
+	right
+	</div>
+
+	<div class="col-d-11 col-t-12">
+	all across
+	</div>
+
+	<div class="col-d-12 col-t-12">
+	</div>
+</div>
+
+<!--
+<a id = "nextBtn" onclick="submitnext" class="previous round">&#8249;</a>
+
+<script type="application/javascript">
+
+	if page > 0:
+		$("#nextBtn").submitnext(function (e){
+		page = page+1
+		var action = "/user_list/show?page=" + page
+		alert(response)
+	});
+</script>
+
+<script>
+<a id = "prev Btn" onclick="submitprev" class="next round">&#8250;</a>
+<a href="/user_list/show?page=" + page class="previous">&laquo; Previous</a>
+<script type="application/javascript">
+
+	if page > 1:
+		$("#prevBtn").submitprev(function (e){
+		page = page-1
+		var action = "/user_list/show?page=" + page
+		alert(response)
+	});
+</script> -->
+
+</body>

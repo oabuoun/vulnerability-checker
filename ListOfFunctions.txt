@@ -1,0 +1,25 @@
+class UserPasswordDetails():
+check_admin(self, user_name)
+change_access(self, user_name)
+change_username(self, old_user_name, new_user_name)
+table_update(self, user_name) # changed to delete_new_user
+delete_new_user(self, user_name)
+check_existence(self, user_name)
+create_new_user(self,user_name,first_name,last_name,birth_year)
+
+
+
+
+
+## Completed from previous
+class UserPasswordDetails
+password_strength_prompt() # the same as check_policy
+read_password_policy()
+check_policy()
+check_list()
+check_user_details()
+
+
+
+# To improve for future:
+# - Not writing the sql password into the file
