@@ -1,0 +1,101 @@
+<html>
+  <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>Home</title>
+  	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  	<link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'css/indexCSS.css') }}" title = "home page CSS"/>
+    <script  src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+      var myToken = localStorage.getItem("myToken")
+      alert(myToken)
+      if ((myToken != null) && (myToken != "")) {
+
+        document.location.href = "/login?myToken="+myToken
+      }
+
+    </script>
+    <script>
+    //james' javascript
+      function navShrink() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+
+    </script>
+  </head>
+  <body>
+    <div class = "topheader">
+  			<a><img src = "/static/perm_images/logo.jpg" alt = "Logo, Avatar, Character"/></a>
+  		</div>
+  	<div class="header">
+  		<div class="topnav" id="myTopnav">
+  			<div class="topnav-right">
+  				<a href="javascript:void(0);" class="icon" onclick="navShrink()">
+  				<i class="menu-bars"></i>
+  				</a>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="rowShape">
+  		<div class="col-d-1 col-t-12">
+  		</div>
+
+  		<div class="col-d-6 col-t-12">
+  			<h2>Login Form</h2>
+  			<form action= "/login" method="post">
+  			  <div class="imgcontainer">
+  				<img src="/static/perm_images/avatar.png" alt="Avatar" class="avatar">
+  			  </div>
+
+  			  <div class="login_container">
+  				  <div class="form-group">
+  					<label for="username"></label>
+  					<input type="text"  class="form-control" id = username placeholder="Enter Username" name="username" value="{{username}}" required>
+
+  					<label for="pwd"></label>
+  					<input type="password"  class="form-control" id = "pwd" placeholder="Enter Password" name="pwd" value= "{{request.form.password}}" required>
+
+  					<button type="submit" value="Submit">Login</button>
+  				  </div>
+  			  </div>
+  			</form>
+  		</div>
+  		<div class="col-d-4 col-t-12">
+  			<h2>Register Form</h2>
+  			<div class="register_container">
+  			  <form action = "/register" method = "post">
+  				<div class="form-group">
+  					<label for="fname"></label>
+  					<input type="text" class="form-control" id = "fname" placeholder="Enter First Name" name="fname" value= "{{fname}}" required>
+  					<label for="lname"></label>
+  					<input type="text"  class="form-control" id = "lname" placeholder="Enter Last Name" name="lname"value="{{lname}}" required>
+  					<label for="username"></label>
+  					<input type="text"  class="form-control" id = "username" placeholder="Enter Username" name="username" value= "{{username}}" required>
+  					<label for="year"></label>
+  					<input type="number"  class="form-control" id = "username" placeholder="Enter Birth year" name="year" value="{{year}}" required>
+  					<label for="psw"></label>
+  					<input type="password"  class="form-control" id = "pwd" placeholder="Enter Password" name="pwd" value= "{{pwd}}" required>
+  					<input type="submit" value="Submit">
+  				</div>
+  			  </form>
+  			</div>
+  		</div>
+  		<div class="col-d-1 col-t-12">
+  		</div>
+  	</div>
+
+
+
+  </body>
+</html>

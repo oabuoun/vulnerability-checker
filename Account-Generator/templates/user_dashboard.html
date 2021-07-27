@@ -1,0 +1,71 @@
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'css/user_dashboardCSS.css') }}" title = "home page CSS"/>
+
+</head>
+<body>
+
+<div class="header">
+	<div class = "topheader">
+		<a><img src = "/static/perm_images/logo.jpg" alt = "Logo, Avatar, Character"/></a>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<div class="topnav-right">
+			<a href="javascript:void(0);" class="icon" onclick="navShrink()">
+			<i class="menu-bars"></i>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="rowShape">
+	<div class="col-d-11 col-t-12">
+		<h2>User Dashboard</h2>
+	</div>
+	<div class="col-d-3 col-t-12">
+	</div>
+
+
+	<div class="col-d-6 col-t-12">
+		<div class="user_container">
+			<div class="form-group">
+				<button id= "btnLogout" type="button" value="Log Out" onclick="logout()">Log out</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-d-3 col-t-12">
+	</div>
+</div>
+
+<script  src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    var myToken = localStorage.getItem("myToken")
+    var myUsername = localStorage.getItem("myUsername")
+
+    if ((myToken == null) || (myToken == "")) {
+      document.location.href = "/"
+    }
+
+    function logout(){
+      localStorage.removeItem("myToken")
+      localStorage.removeItem("myUsername")
+      document.location.href = "/"
+    }
+
+</script>
+<script>
+//james' javascript
+function scrollToTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+</body>
